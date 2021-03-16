@@ -1,0 +1,18 @@
+(executables
+ (names test1)
+ (flags (:standard -dsource))
+ (modules test1)
+ (preprocess
+  (action
+   (run %{project_root}/bin/rewriter_for_bin.exe %{input-file}))))
+
+(rule
+ (targets rewriter_for_bin.exe)
+ (action
+  (run
+   mkcamlp5.opt
+   -package
+   camlp5,camlp5.pa_o,camlp5.extend,camlp5.quotations,camlp5.extfold,camlp5.pr_o,proj1.pa1
+   -verbose
+   -o
+   %{targets})))
